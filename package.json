@@ -1,0 +1,24 @@
+{
+  "name": "menu-animation",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "parcel index.html --no-source-maps",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "gsap": "^3.6.1",
+    "l": "^0.6.0",
+    "paper": "^0.12.15",
+    "simplex-noise": "^2.4.0",
+    "splitting": "^1.0.6",
+    "utils.js": "^1.0.1"
+  },
+  "devDependencies": {
+    "sass": "^1.32.11"
+  }
+}

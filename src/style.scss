@@ -1,0 +1,81 @@
+@import url("https://api.fontshare.com/css?f[]=cabinet-grotesk@1&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+body {
+  background-color: #202020;
+}
+
+.nav {
+  position: fixed;
+  color: #d8d2dd;
+
+  &__bg {
+    position: absolute;
+    display: inline-block;
+    height: 100vh;
+    width: 27vw;
+    background-color: rgba(255, 255, 255, 0.075);
+    clip-path: polygon(0 0, 50% 0, 100% 100%, 0% 100%);
+    transform: translateX(-100%);
+  }
+
+  &__list {
+    position: fixed;
+    z-index: 2;
+    left: 2rem;
+    bottom: 4rem;
+    display: none
+  }
+
+  &__link {
+    font-family: "Cabinet Grotesk", sans-serif;
+    line-height: 90%;
+    font-weight: 600;
+    font-size: 9rem;
+    padding-bottom: .5rem;
+    overflow: hidden;
+
+  }
+  
+  &__button {
+    height: 70px;
+    width: 70px;
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    top: 2rem;
+    left: 2rem;
+    z-index: 100;
+    transform: rotate(180deg);
+    transition: all .2s ;
+
+    &:hover {
+      transform: rotate(165deg);
+    }
+  }
+}
+
+// CURSOR 
+
+.cursor {
+  position: fixed;
+  left: 0;
+  top: 0;
+  pointer-events: none;
+}
+
+.cursor--small {
+  width: 5px;
+  height: 5px;
+  left: -2.5px;
+  top: -2.5px;
+  border-radius: 50%;
+  z-index: 1000;
+  background-color: white;
+}
+
+.cursor--canvas {
+  width: 100vw;
+  height: 100vh;
+  z-index: 1200;
+}
