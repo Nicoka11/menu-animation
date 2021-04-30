@@ -23326,7 +23326,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 var stateNav = {
   isOpen: false
 };
-var navBg = document.querySelector('.nav__bg');
+var navBg = document.querySelector(".nav__bg");
 var navButton = document.querySelector(".nav__button");
 var navMenuLink = document.querySelector(".nav__list");
 
@@ -23347,11 +23347,13 @@ var timeline = _gsap.default.timeline({
 timeline.to(navMenuLink, {
   display: "inline-block"
 });
-timeline.staggerTo(navMenuText, 0.5, {
+timeline.staggerTo(navMenuText, 0.6, {
   y: "0",
   opacity: 1,
   ease: "power3.out"
-}, 0.03);
+}, 0.015).to(navMenuLink, {
+  pointerEvents: 'auto'
+});
 
 function handleSwitchNav() {
   if (!stateNav.isOpen) {
@@ -23359,38 +23361,36 @@ function handleSwitchNav() {
 
     _gsap.default.to(navBg, {
       x: 0,
-      duration: .9,
+      duration: 0.9,
       ease: "power3.out"
     });
-
-    _gsap.default.to(navButton, {
-      rotation: "0deg",
-      ease: "power3",
-      duration: 0.2
-    });
-
-    _gsap.default.to;
-  } else if (stateNav.isOpen) {
+  } else {
     _gsap.default.to(navBg, {
-      x: '-100%',
-      duration: .9,
-      delay: .45,
-      ease: "power3.in"
+      x: "-100%",
+      duration: 0.9,
+      ease: "power3.in",
+      delay: 0.5
     });
 
     timeline.reverse();
-
-    _gsap.default.to(navButton, {
-      rotation: "180deg",
-      ease: "power3",
-      duration: 0.2
-    });
   }
 
   stateNav.isOpen = !stateNav.isOpen;
-}
+} // Nav button animations
 
-navButton.addEventListener("click", handleSwitchNav);
+
+navButton.addEventListener("click", function () {
+  navButton.style.transform = "rotate(".concat(stateNav.isOpen ? "180deg" : "0deg", ")");
+});
+navButton.addEventListener("mouseenter", function () {
+  navButton.style.transform = "rotate(".concat(!stateNav.isOpen ? "165deg" : "20deg", ")");
+});
+navButton.addEventListener("mouseleave", function () {
+  navButton.style.transform = "rotate(".concat(!stateNav.isOpen ? "180deg" : "0deg", ")");
+}); // Nav Toggle
+
+navButton.addEventListener("click", handleSwitchNav); // Nav links hover animation
+
 navMenuLink.addEventListener("mouseover", function (e) {
   var target = e.target.closest(".nav__link");
   if (!target) return;
@@ -23452,7 +23452,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55753" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56828" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

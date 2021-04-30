@@ -23,6 +23,7 @@ body {
   left: 2rem;
   bottom: 4rem;
   display: none;
+  pointer-events: none;
 }
 .nav__link {
   font-family: "Cabinet Grotesk", sans-serif;
@@ -42,10 +43,7 @@ body {
   left: 2rem;
   z-index: 100;
   transform: rotate(180deg);
-  transition: all 0.2s;
-}
-.nav__button:hover {
-  transform: rotate(165deg);
+  transition: all 0.2s ease;
 }
 
 .cursor {

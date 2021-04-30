@@ -6,7 +6,7 @@ const stateNav = {
   isOpen: false,
 };
 
-const navBg = document.querySelector('.nav__bg')
+const navBg = document.querySelector(".nav__bg");
 const navButton = document.querySelector(".nav__button");
 const navMenuLink = document.querySelector(".nav__list");
 const navMenuLinks = [...document.querySelectorAll(".nav__link")];
@@ -24,31 +24,46 @@ const timeline = gsap.timeline({ paused: true });
 timeline.to(navMenuLink, { display: "inline-block" });
 timeline.staggerTo(
   navMenuText,
-  0.5,
+  0.6,
   {
     y: "0",
     opacity: 1,
     ease: "power3.out",
   },
-  0.03
-);
+  0.015
+).to(navMenuLink, {pointerEvents: 'auto'})
 
 function handleSwitchNav() {
   if (!stateNav.isOpen) {
     timeline.play();
-    gsap.to(navBg, {x: 0, duration: .9, ease: "power3.out"})
-    gsap.to(navButton, { rotation: "0deg", ease: "power3", duration: 0.2 });
-    gsap.to
-  } else if (stateNav.isOpen) {
-    gsap.to(navBg, {x: '-100%', duration: .9, delay: .45, ease: "power3.in"})
+    gsap.to(navBg, { x: 0, duration: 0.9, ease: "power3.out" });
+  } else {
+    gsap.to(navBg, {
+      x: "-100%",
+      duration: 0.9,
+      ease: "power3.in",
+      delay: 0.5,
+    });
     timeline.reverse();
-    gsap.to(navButton, { rotation: "180deg", ease: "power3", duration: 0.2 });
   }
   stateNav.isOpen = !stateNav.isOpen;
 }
 
+// Nav button animations
+navButton.addEventListener("click", () => {
+  navButton.style.transform = `rotate(${stateNav.isOpen ? "180deg" : "0deg"})`;
+});
+navButton.addEventListener("mouseenter", () => {
+  navButton.style.transform = `rotate(${!stateNav.isOpen ? "165deg" : "20deg"})`;
+});
+navButton.addEventListener("mouseleave", () => {
+  navButton.style.transform = `rotate(${!stateNav.isOpen ? "180deg" : "0deg"})`;
+});
+
+// Nav Toggle
 navButton.addEventListener("click", handleSwitchNav);
 
+// Nav links hover animation
 navMenuLink.addEventListener("mouseover", (e) => {
   const target = e.target.closest(".nav__link");
   if (!target) return;
@@ -63,7 +78,6 @@ navMenuLink.addEventListener("mouseover", (e) => {
     });
   });
 });
-
 navMenuLink.addEventListener("mouseout", (e) => {
   navMenuLinks.forEach((item) => {
     gsap.to(item, {
