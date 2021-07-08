@@ -25,8 +25,7 @@ initCursor();
 let lastX = 0;
 let lastY = 0;
 let isStuck = false;
-let showCursor = false;
-let group, stuckX, stuckY, fillOuterCursor;
+let group, stuckX, stuckY;
 let currentTarget;
 
 const initCanvas = () => {
@@ -53,7 +52,7 @@ const initCanvas = () => {
   group = new paper.Group([polygon]);
   group.applyMatrix = false;
 
-  paper.view.onFrame = (e) => {
+  paper.view.onFrame = () => {
     // For button
     if (!isStuck) {
       lastX = lerp(lastX, clientX, 0.1);

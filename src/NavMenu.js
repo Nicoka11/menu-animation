@@ -68,7 +68,7 @@ navMenuLink.addEventListener("mouseover", (e) => {
   const target = e.target.closest(".nav__link");
   if (!target) return;
   const allNavs = navMenuLinks.filter((item) => {
-    return item.dataset.name !== target.dataset.name;
+    return item.textContent !== target.textContent;
   });
   gsap.to(target, { color: "#FFFFFF" });
   allNavs.forEach((item) => {

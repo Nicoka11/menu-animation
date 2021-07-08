@@ -22710,8 +22710,7 @@ initCursor(); // Cursor Circle
 var lastX = 0;
 var lastY = 0;
 var isStuck = false;
-var showCursor = false;
-var group, stuckX, stuckY, fillOuterCursor;
+var group, stuckX, stuckY;
 var currentTarget;
 
 var initCanvas = function initCanvas() {
@@ -22734,7 +22733,7 @@ var initCanvas = function initCanvas() {
   group = new _paper.default.Group([polygon]);
   group.applyMatrix = false;
 
-  _paper.default.view.onFrame = function (e) {
+  _paper.default.view.onFrame = function () {
     // For button
     if (!isStuck) {
       lastX = (0, _utils.lerp)(lastX, clientX, 0.1);
@@ -23395,7 +23394,7 @@ navMenuLink.addEventListener("mouseover", function (e) {
   var target = e.target.closest(".nav__link");
   if (!target) return;
   var allNavs = navMenuLinks.filter(function (item) {
-    return item.dataset.name !== target.dataset.name;
+    return item.textContent !== target.textContent;
   });
 
   _gsap.default.to(target, {
@@ -23452,7 +23451,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56828" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65390" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
