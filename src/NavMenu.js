@@ -20,9 +20,9 @@ navMenuText.forEach(function (el) {
   el.style.transform = "translateY(-120%)";
 });
 
-const timeline = gsap.timeline({ paused: true });
-timeline.to(navMenuLink, { display: "inline-block" });
-timeline.staggerTo(
+const tlNavMenuAnimation = gsap.timeline({ paused: true });
+tlNavMenuAnimation.to(navMenuLink, { display: "inline-block" });
+tlNavMenuAnimation.staggerTo(
   navMenuText,
   0.6,
   {
@@ -35,7 +35,7 @@ timeline.staggerTo(
 
 function handleSwitchNav() {
   if (!stateNav.isOpen) {
-    timeline.play();
+    tlNavMenuAnimation.play();
     gsap.to(navBg, { x: 0, duration: 0.9, ease: "power3.out" });
   } else {
     gsap.to(navBg, {
@@ -44,15 +44,13 @@ function handleSwitchNav() {
       ease: "power3.in",
       delay: 0.5,
     });
-    timeline.reverse();
+    tlNavMenuAnimation.reverse();
   }
+  navButton.style.transform = `rotate(${stateNav.isOpen ? "180deg" : "0deg"})`;
   stateNav.isOpen = !stateNav.isOpen;
 }
 
 // Nav button animations
-navButton.addEventListener("click", () => {
-  navButton.style.transform = `rotate(${stateNav.isOpen ? "180deg" : "0deg"})`;
-});
 navButton.addEventListener("mouseenter", () => {
   navButton.style.transform = `rotate(${!stateNav.isOpen ? "165deg" : "20deg"})`;
 });
@@ -87,3 +85,7 @@ navMenuLink.addEventListener("mouseout", (e) => {
     });
   });
 });
+
+navMenuLinks.forEach((navLink) => {
+  navLink.addEventListener("click", handleSwitchNav)
+})

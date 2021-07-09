@@ -1,6 +1,7 @@
 import gsap from "gsap";
 import paper from "paper";
-import { lerp } from "./utils.js";
+import Utils from "./Utils.js";
+
 
 // Small Cursor
 let clientX = -100;
@@ -55,12 +56,12 @@ const initCanvas = () => {
   paper.view.onFrame = () => {
     // For button
     if (!isStuck) {
-      lastX = lerp(lastX, clientX, 0.1);
-      lastY = lerp(lastY, clientY, 0.1);
+      lastX = Utils.lerp(lastX, clientX, 0.1);
+      lastY = Utils.lerp(lastY, clientY, 0.1);
       group.position = new paper.Point(lastX, lastY);
     } else if (isStuck) {
-      lastX = lerp(lastX, stuckX, 0.2);
-      lastY = lerp(lastY, stuckY, 0.2);
+      lastX = Utils.lerp(lastX, stuckX, 0.2);
+      lastY = Utils.lerp(lastY, stuckY, 0.2);
       group.position = new paper.Point(lastX, lastY);
     }
 
@@ -70,7 +71,7 @@ const initCanvas = () => {
       currentTarget.classList.contains("nav__link")
     ) {
       polygon.scale(5);
-      polygon.strokeWidth = strokeWidth * 2
+      polygon.strokeWidth = strokeWidth * 2;
     } else if (
       isStuck &&
       polygon.bounds.width < shapeBounds.width &&
@@ -79,13 +80,13 @@ const initCanvas = () => {
       polygon.scale(1.1);
     } else if (!isStuck && polygon.bounds.width > radius * 2) {
       polygon.scale(0.9);
-      polygon.strokeWidth = strokeWidth
+      polygon.strokeWidth = strokeWidth;
     }
 
     // For nav list
     if (!isStuck) {
-      lastX = lerp(lastX, clientX, 0.1);
-      lastY = lerp(lastY, clientY, 0.1);
+      lastX = Utils.lerp(lastX, clientX, 0.1);
+      lastY = Utils.lerp(lastY, clientY, 0.1);
       group.position = new paper.Point(lastX, lastY);
     }
   };

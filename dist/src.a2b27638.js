@@ -22655,22 +22655,41 @@ var paper = function (self, undefined) {
 
   return paper;
 }.call(this, (typeof self === "undefined" ? "undefined" : _typeof(self)) === 'object' ? self : null);
-},{"./node/self.js":"C:/Users/nicok/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/_empty.js","./node/extend.js":"C:/Users/nicok/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/_empty.js","process":"C:/Users/nicok/AppData/Roaming/npm/node_modules/parcel-bundler/node_modules/process/browser.js"}],"src/utils.js":[function(require,module,exports) {
+},{"./node/self.js":"C:/Users/nicok/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/_empty.js","./node/extend.js":"C:/Users/nicok/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/_empty.js","process":"C:/Users/nicok/AppData/Roaming/npm/node_modules/parcel-bundler/node_modules/process/browser.js"}],"src/Utils.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.lerp = lerp;
-exports.rangeMap = rangeMap;
+exports.default = void 0;
 
-function lerp(a, b, n) {
-  return (1 - n) * a + n * b;
-}
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function rangeMap(value, in_min, in_max, out_min, out_max) {
-  return (value - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
-}
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var Utils = /*#__PURE__*/function () {
+  function Utils() {
+    _classCallCheck(this, Utils);
+  }
+
+  _createClass(Utils, null, [{
+    key: "lerp",
+    value: function lerp(a, b, n) {
+      return (1 - n) * a + n * b;
+    }
+  }, {
+    key: "rangeMap",
+    value: function rangeMap(value, in_min, in_max, out_min, out_max) {
+      return (value - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+    }
+  }]);
+
+  return Utils;
+}();
+
+exports.default = Utils;
 },{}],"src/CustomCursor.js":[function(require,module,exports) {
 "use strict";
 
@@ -22678,7 +22697,7 @@ var _gsap = _interopRequireDefault(require("gsap"));
 
 var _paper = _interopRequireDefault(require("paper"));
 
-var _utils = require("./utils.js");
+var _Utils = _interopRequireDefault(require("./Utils.js"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -22736,12 +22755,12 @@ var initCanvas = function initCanvas() {
   _paper.default.view.onFrame = function () {
     // For button
     if (!isStuck) {
-      lastX = (0, _utils.lerp)(lastX, clientX, 0.1);
-      lastY = (0, _utils.lerp)(lastY, clientY, 0.1);
+      lastX = _Utils.default.lerp(lastX, clientX, 0.1);
+      lastY = _Utils.default.lerp(lastY, clientY, 0.1);
       group.position = new _paper.default.Point(lastX, lastY);
     } else if (isStuck) {
-      lastX = (0, _utils.lerp)(lastX, stuckX, 0.2);
-      lastY = (0, _utils.lerp)(lastY, stuckY, 0.2);
+      lastX = _Utils.default.lerp(lastX, stuckX, 0.2);
+      lastY = _Utils.default.lerp(lastY, stuckY, 0.2);
       group.position = new _paper.default.Point(lastX, lastY);
     }
 
@@ -22757,8 +22776,8 @@ var initCanvas = function initCanvas() {
 
 
     if (!isStuck) {
-      lastX = (0, _utils.lerp)(lastX, clientX, 0.1);
-      lastY = (0, _utils.lerp)(lastY, clientY, 0.1);
+      lastX = _Utils.default.lerp(lastX, clientX, 0.1);
+      lastY = _Utils.default.lerp(lastY, clientY, 0.1);
       group.position = new _paper.default.Point(lastX, lastY);
     }
   };
@@ -22800,7 +22819,7 @@ function initHovers() {
 }
 
 initHovers();
-},{"gsap":"node_modules/gsap/index.js","paper":"node_modules/paper/dist/paper-full.js","./utils.js":"src/utils.js"}],"node_modules/splitting/dist/splitting.js":[function(require,module,exports) {
+},{"gsap":"node_modules/gsap/index.js","paper":"node_modules/paper/dist/paper-full.js","./Utils.js":"src/Utils.js"}],"node_modules/splitting/dist/splitting.js":[function(require,module,exports) {
 var define;
 var global = arguments[3];
 (function (global, factory) {
@@ -23339,14 +23358,14 @@ navMenuText.forEach(function (el) {
   el.style.transform = "translateY(-120%)";
 });
 
-var timeline = _gsap.default.timeline({
+var tlNavMenuAnimation = _gsap.default.timeline({
   paused: true
 });
 
-timeline.to(navMenuLink, {
+tlNavMenuAnimation.to(navMenuLink, {
   display: "inline-block"
 });
-timeline.staggerTo(navMenuText, 0.6, {
+tlNavMenuAnimation.staggerTo(navMenuText, 0.6, {
   y: "0",
   opacity: 1,
   ease: "power3.out"
@@ -23356,7 +23375,7 @@ timeline.staggerTo(navMenuText, 0.6, {
 
 function handleSwitchNav() {
   if (!stateNav.isOpen) {
-    timeline.play();
+    tlNavMenuAnimation.play();
 
     _gsap.default.to(navBg, {
       x: 0,
@@ -23371,16 +23390,14 @@ function handleSwitchNav() {
       delay: 0.5
     });
 
-    timeline.reverse();
+    tlNavMenuAnimation.reverse();
   }
 
+  navButton.style.transform = "rotate(".concat(stateNav.isOpen ? "180deg" : "0deg", ")");
   stateNav.isOpen = !stateNav.isOpen;
 } // Nav button animations
 
 
-navButton.addEventListener("click", function () {
-  navButton.style.transform = "rotate(".concat(stateNav.isOpen ? "180deg" : "0deg", ")");
-});
 navButton.addEventListener("mouseenter", function () {
   navButton.style.transform = "rotate(".concat(!stateNav.isOpen ? "165deg" : "20deg", ")");
 });
@@ -23417,6 +23434,9 @@ navMenuLink.addEventListener("mouseout", function (e) {
     });
   });
 });
+navMenuLinks.forEach(function (navLink) {
+  navLink.addEventListener("click", handleSwitchNav);
+});
 },{"gsap":"node_modules/gsap/index.js","splitting":"node_modules/splitting/dist/splitting.js"}],"src/index.js":[function(require,module,exports) {
 "use strict";
 
@@ -23451,7 +23471,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65390" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59451" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
