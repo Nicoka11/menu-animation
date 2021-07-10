@@ -2,7 +2,6 @@ import gsap from "gsap";
 import paper from "paper";
 import Utils from "./Utils.js";
 
-
 // Small Cursor
 let clientX = -100;
 let clientY = -100;

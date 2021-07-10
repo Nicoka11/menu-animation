@@ -24,6 +24,7 @@ body {
   bottom: 4rem;
   display: none;
   pointer-events: none;
+  z-index: 100;
 }
 .nav__link {
   font-family: "Cabinet Grotesk", sans-serif;
@@ -67,4 +68,22 @@ body {
   width: 100vw;
   height: 100vh;
   z-index: 1200;
+}
+
+#cube {
+  pointer-events: none;
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cube__sized {
+  pointer-events: all;
+  height: 30px;
+  width: 30px;
+  border: white 5px solid;
+  border-radius: 10px;
 }
