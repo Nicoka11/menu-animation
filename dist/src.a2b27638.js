@@ -22745,7 +22745,8 @@ var initCanvas = function initCanvas() {
   var strokeWidth = 2;
   var segments = 8;
   var radius = 15;
-  var polygon = new _paper.default.Path.RegularPolygon(new _paper.default.Point(0, 0), segments, radius);
+  var rotation = 45;
+  var polygon = new _paper.default.Path.RegularPolygon(new _paper.default.Point(0, 0), segments, radius, rotation);
   polygon.strokeColor = strokeColor;
   polygon.strokeWidth = strokeWidth;
   polygon.smooth();
@@ -23450,15 +23451,20 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var cube = document.querySelector(".cube__sized");
 var cubeX = 30;
 var cubeY = 30;
+var cubeLastX = 0;
+var cubeLastY = 0;
 
 function updateCubeSize() {
   document.addEventListener("mousemove", function (e) {
     cubeX = Math.abs(_Utils.default.rangeMap(e.clientX, 0, window.innerWidth, 0, 100) - 50);
     cubeY = Math.abs(_Utils.default.rangeMap(e.clientY, 0, window.innerHeight, 0, 100) - 50);
+    cubeLastX = _Utils.default.lerp(cubeLastX, cubeX, 0.3);
+    cubeLastY = _Utils.default.lerp(cubeLastY, cubeY, 0.3);
 
     _gsap.default.set(cube, {
-      width: "".concat(cubeX, "vw"),
-      height: "".concat(cubeY, "vh")
+      width: "".concat(cubeLastX, "vw"),
+      height: "".concat(cubeLastY, "vh"),
+      ease: 'Power3.ease'
     });
   });
 }
@@ -23500,7 +23506,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64395" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62056" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -40,11 +40,13 @@ const initCanvas = () => {
   const strokeWidth = 2;
   const segments = 8;
   const radius = 15;
+  const rotation = 45;
 
   const polygon = new paper.Path.RegularPolygon(
     new paper.Point(0, 0),
     segments,
-    radius
+    radius,
+    rotation,
   );
   polygon.strokeColor = strokeColor;
   polygon.strokeWidth = strokeWidth;
